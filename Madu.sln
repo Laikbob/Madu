@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Madu", "Madu.csproj", "{EAB13568-1FF0-4240-809F-CD98E1170167}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EAB13568-1FF0-4240-809F-CD98E1170167}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAB13568-1FF0-4240-809F-CD98E1170167}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAB13568-1FF0-4240-809F-CD98E1170167}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAB13568-1FF0-4240-809F-CD98E1170167}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CF5912E0-EB95-4C13-9C81-95C6CF169F10}
+	EndGlobalSection
+EndGlobal
