@@ -34,7 +34,7 @@ namespace Madu
 
                 string mode = modeChoice == "2" ? "hard" : "easy";  // по умолчанию — легкий режим
 
-                Game game = new Game(playerName, new ScoreManager(filePath), mode);
+                Game game = new Game(playerName, new ScoreManager(), mode);
                 game.Run();
             }
             else

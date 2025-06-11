@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Formats.Asn1.AsnWriter;
 
+
 namespace Madu
 {
     public class ScoreManager
@@ -12,10 +13,13 @@ namespace Madu
         private string filePath;
         private List<Score> scores;
 
-        public ScoreManager(string filePath)
+        public ScoreManager()
         {
-            this.filePath = filePath;
+            string folder = @"C:\Users\User\source\repos\Madu\";
+            filePath = Path.Combine(folder, "highscores.txt");
+
             scores = LoadScores();
+
         }
 
         public List<Score> LoadScores()
@@ -53,11 +57,11 @@ namespace Madu
         {
             if (scores.Count == 0)
             {
-                Console.WriteLine("No high scores yet.");
+                Console.WriteLine("Нет сохранённых очков.");
                 return;
             }
 
-            Console.WriteLine("High Scores:");
+            Console.WriteLine("Records:");
             foreach (var score in scores.OrderByDescending(s => s.Value))
             {
                 Console.WriteLine($"{score.Name}: {score.Value}");

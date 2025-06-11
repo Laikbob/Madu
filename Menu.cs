@@ -12,7 +12,7 @@ public class Menu
 
     public Menu(string filePath)
     {
-        scoreManager = new ScoreManager(filePath);
+        scoreManager = new ScoreManager();
     }
 
     public bool HandleMenuChoice()
