@@ -7,9 +7,14 @@ using System.Threading.Tasks;
 
 namespace Madu
 {
-    class Figure   // базовый класс, по отношению к его наследникам (Snake, HorizontalLine, VerticalLine)
+    class Figure
     {
         protected List<Point> plist;
+
+        public Figure(List<Point> points)
+        {
+            plist = points;
+        }
 
         public void Draw()
         {
@@ -19,8 +24,7 @@ namespace Madu
             }
         }
 
-        // проверяет пересечение с другой фигурой
-        internal bool IsHit(Figure figure)  // принимает фигуру
+        internal bool IsHit(Figure figure)
         {
             foreach (var p in plist)
             {
@@ -30,8 +34,7 @@ namespace Madu
             return false;
         }
 
-        // проверяет пересечение с конкретной точкой
-        private bool IsHit(Point point)  // принимает точку
+        private bool IsHit(Point point)
         {
             foreach (var p in plist)
             {

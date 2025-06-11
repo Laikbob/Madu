@@ -7,16 +7,22 @@ using System.Threading.Tasks;
 
 namespace Madu
 {
-    class HorizontalLine : Figure  // наследник класса Figure
+    class HorizontalLine : Figure
     {
         public HorizontalLine(int xLeft, int xRight, int y, char sym)
+            : base(CreatePoints(xLeft, xRight, y, sym))
         {
-            plist = new List<Point>();
+        }
+
+        private static List<Point> CreatePoints(int xLeft, int xRight, int y, char sym)
+        {
+            List<Point> points = new List<Point>();
             for (int x = xLeft; x <= xRight; x++)
             {
-                Point p = new Point(x, y, sym);
-                plist.Add(p);
+                points.Add(new Point(x, y, sym));
             }
+            return points;
         }
     }
+
 }

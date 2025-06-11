@@ -27,11 +27,9 @@ namespace Madu
             foreach (string line in lines)
             {
                 string[] parts = line.Split(',');
-                if (parts.Length == 2)
+                if (parts.Length == 2 && int.TryParse(parts[1], out int scoreValue))
                 {
-                    string name = parts[0];
-                    int scoreValue = int.Parse(parts[1]);
-                    scoreList.Add(new Score(name, scoreValue));
+                    scoreList.Add(new Score(parts[0], scoreValue));
                 }
             }
 
@@ -41,11 +39,24 @@ namespace Madu
         public void SaveScore(Score score)
         {
             scores.Add(score);
-            File.AppendAllText(filePath, $"{score.Name},{score.Value}\n");
+            try
+            {
+                File.AppendAllText(filePath, $"{score.Name},{score.Value}\n");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ошибка записи в файл: " + ex.Message);
+            }
         }
 
         public void DisplayScores()
         {
+            if (scores.Count == 0)
+            {
+                Console.WriteLine("No high scores yet.");
+                return;
+            }
+
             Console.WriteLine("High Scores:");
             foreach (var score in scores.OrderByDescending(s => s.Value))
             {

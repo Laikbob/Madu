@@ -10,16 +10,21 @@ namespace Madu
     {
         Derection direction;
 
-        public Snake(Point tail, int length, Derection _direction)
+        public Snake(Point tail, int length, Derection direction)
+        : base(CreateSnakePoints(tail, length)) // ← передаём список в Figure
         {
-            direction = _direction;
-            plist = new List<Point>();
+            this.direction = direction;
+        }
+
+        private static List<Point> CreateSnakePoints(Point tail, int length)
+        {
+            List<Point> points = new List<Point>();
             for (int i = 0; i < length; i++)
             {
-                Point p = new Point(tail);
-                p.Move(i, direction);
-                plist.Add(p);
+                Point p = new Point(tail.x + i, tail.y, tail.sym);
+                points.Add(p);
             }
+            return points;
         }
 
         internal void Move()

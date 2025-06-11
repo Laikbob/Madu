@@ -26,7 +26,15 @@ namespace Madu
                 Console.Write("Enter your name: ");
                 string playerName = Console.ReadLine();
 
-                Game game = new Game(playerName, new ScoreManager(filePath));
+                Console.WriteLine("Select mode: ");
+                Console.WriteLine("1. Easy");
+                Console.WriteLine("2. Hard");
+                Console.Write("Your choice (1 or 2): ");
+                string modeChoice = Console.ReadLine();
+
+                string mode = modeChoice == "2" ? "hard" : "easy";  // по умолчанию — легкий режим
+
+                Game game = new Game(playerName, new ScoreManager(filePath), mode);
                 game.Run();
             }
             else

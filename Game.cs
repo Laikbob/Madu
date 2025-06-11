@@ -6,39 +6,37 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Madu
-{
-    class Game
+    namespace Madu
     {
-        private string playerName;
-        private ScoreManager scoreManager;
-
-        private Sounds backgroundMusic = new Sounds();
-        private Sounds effects = new Sounds();
-
-        public Game(string playerName, ScoreManager scoreManager)
+        class Game
         {
-            this.playerName = playerName;
-            this.scoreManager = scoreManager;
-        }
+            private string playerName;
+            private ScoreManager scoreManager;
+            private string mode;
 
-        // Метод запуска меню — музыка играет
-        public void ShowMenu()
-        {
-            Console.Clear();
-            Console.WriteLine("Добро пожаловать в игру!");
-            Console.WriteLine("Нажмите Enter, чтобы начать...");
+            private Sounds backgroundMusic = new Sounds();
+            private Sounds effects = new Sounds();
 
-            // Запускаем фоновую музыку
-            backgroundMusic.PlaySound(@"C:\Users\User\source\repos\Madu\resources\background.mp3", loop: true);
+            public Game(string playerName, ScoreManager scoreManager, string mode)
+            {
+                this.playerName = playerName;
+                this.scoreManager = scoreManager;
+                this.mode = mode;
+            }
 
-            Console.ReadLine();
-        }
+            public void ShowMenu()
+            {
+                Console.Clear();
+                Console.WriteLine("Добро пожаловать в игру!");
+                Console.WriteLine("Нажмите Enter, чтобы начать...");
 
-        // Метод запуска самой игры — музыка выключается
+                backgroundMusic.PlaySound(@"C:\Users\User\source\repos\Madu\resources\background.mp3", loop: true);
+
+                Console.ReadLine();
+            }
+
         public void Run()
         {
-            // Останавливаем фоновую музыку при старте игры
             backgroundMusic.Stop();
 
             Console.Clear();
@@ -46,6 +44,7 @@ namespace Madu
             Console.CursorVisible = false;
 
             Walls walls = new Walls(80, 25);
+
             walls.Draw();
 
             Point p = new Point(10, 10, '*');
@@ -63,18 +62,22 @@ namespace Madu
                 Console.SetCursorPosition(0, 0);
 
                 if (walls.IsHit(snake) || snake.IsHitTail())
-                {
                     break;
-                }
 
                 if (snake.Eat(food))
                 {
                     score++;
 
+                    if (mode == "hard" && score % 5 == 0)
+                    {
+                        walls.GenerateRandomWalls(1);
+                        walls.Draw();
+                    }
+
                     effects.PlaySound(@"C:\Users\User\source\repos\Madu\resources\eat.mp3");
 
                     Console.SetCursorPosition(0, 1);
-                    Console.WriteLine($"Score: {score}");
+                    Console.WriteLine($"Score: {score}   ");
 
                     food = foodCreator.CreateFood();
                     food.Draw();
@@ -93,18 +96,14 @@ namespace Madu
                 }
             }
 
-            // Проиграть звук окончания игры
             effects.PlaySound(@"C:\Users\User\source\repos\Madu\resources\gameover.mp3");
 
             Console.Clear();
             Console.WriteLine("         Game Over!");
             Console.WriteLine($"        Final Score: {score}");
-        }
 
-        public void SaveScore(Score score)
-        {
-            scoreManager.SaveScore(score);
-            Console.WriteLine("       Score saved successfully!");
+            // Вот здесь сохраняем результат
+            scoreManager.SaveScore(new Score(playerName, score));
         }
     }
 }
