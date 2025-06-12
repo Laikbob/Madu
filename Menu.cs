@@ -14,8 +14,8 @@ public class Menu
     {
         scoreManager = new ScoreManager();
     }
-
     public bool HandleMenuChoice()
+
     {
         while (true)
         {

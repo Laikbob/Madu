@@ -8,14 +8,14 @@ namespace Madu
 {
     class Snake : Figure
     {
-        Derection direction;
+        Derection direction; //текущее направление движения змейки
 
         public Snake(Point tail, int length, Derection direction)
         : base(CreateSnakePoints(tail, length)) // ← передаём список в Figure
         {
             this.direction = direction;
         }
-
+        // Создаёт список точек, начиная с хвоста, 
         private static List<Point> CreateSnakePoints(Point tail, int length)
         {
             List<Point> points = new List<Point>();
@@ -26,7 +26,7 @@ namespace Madu
             }
             return points;
         }
-
+        // метот ползонья змейки
         internal void Move()
         {
             Point tail = plist.First();

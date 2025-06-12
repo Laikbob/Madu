@@ -10,9 +10,9 @@ namespace Madu
 {
     public class ScoreManager
     {
-        private string filePath;
-        private List<Score> scores;
-
+        private string filePath; //хранит путь к файлу
+        private List<Score> scores; //хранит текущий список всех загруженных очков
+        //путь для сохранения
         public ScoreManager()
         {
             string folder = @"C:\Users\User\source\repos\Madu\";
@@ -21,7 +21,7 @@ namespace Madu
             scores = LoadScores();
 
         }
-
+        // Загружает список очков из файла, если файл существует.
         public List<Score> LoadScores()
         {
             List<Score> scoreList = new List<Score>();
@@ -39,25 +39,28 @@ namespace Madu
 
             return scoreList;
         }
-
+        // Сохраняет новое очко в файл и добавляет его в список.
         public void SaveScore(Score score)
         {
             scores.Add(score);
             try
             {
-                File.AppendAllText(filePath, $"{score.Name},{score.Value}\n");
+                using (StreamWriter writer = File.AppendText(filePath))
+                {
+                    writer.WriteLine($"{score.Name},{score.Value}");
+                }
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine("Ошибка записи в файл: " + ex.Message);
+          
             }
         }
-
+        // Выводит на экран все сохранённые очки, отсортированные по убыванию.
         public void DisplayScores()
         {
             if (scores.Count == 0)
             {
-                Console.WriteLine("Нет сохранённых очков.");
+                Console.WriteLine("Not saves score.");
                 return;
             }
 

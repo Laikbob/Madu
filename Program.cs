@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace Madu
 {
     class Program
-    {
+    {   
+        // логика выбора для меню
         static void Main(string[] args)
         {
             string filePath = "highscores.txt";
